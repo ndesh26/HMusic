@@ -1,0 +1,9 @@
+<div .ui.container>
+
+<h2>Previously submitted files
+$if null storedFiles
+  <p>No files have been uploaded yet.
+$else
+  <ul>
+    $forall (Entity x (StoredFile name contentType path userId)) <- storedFiles
+      <li> Hello #{name} </li>
