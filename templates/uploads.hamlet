@@ -6,4 +6,4 @@ $if null storedFiles
 $else
   <ul>
     $forall (Entity x (StoredFile name contentType path userId)) <- storedFiles
-      <li> Hello #{name} </li>
+      <li> <button onclick="play('../#{path}')">#{name}</button>

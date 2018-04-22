@@ -40,5 +40,16 @@
                     $nothing
                         File upload result will be here...
 
+    <h2>
+      Your uploaded files:-
 
+    <ul>
+        $forall (Entity x (StoredFile name contentType path userId)) <- storedFiles
+            <li> <a>#{name}</a>
 
+    <h2>
+      List of Users:- 
+
+    <ul>
+        $forall (Entity userId (User ident _)) <- users
+            <li> <a href="@{UploadsR userId}" >#{ident}

@@ -14,6 +14,3 @@ getUploadsR userId = do
                         defaultLayout $ do
                             setTitle "Welcome To Yesod!"
                             $(widgetFile "uploads")
-
-getUserUploads :: UserId -> DB [Entity StoredFile]
-getUserUploads userId = selectList [StoredFileUserId ==. userId] []

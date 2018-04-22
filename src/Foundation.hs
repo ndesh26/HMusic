@@ -296,3 +296,16 @@ unsafeHandler = Unsafe.fakeHandlerGetLogger appLogger
 -- https://github.com/yesodweb/yesod/wiki/Sending-email
 -- https://github.com/yesodweb/yesod/wiki/Serve-static-files-from-a-separate-domain
 -- https://github.com/yesodweb/yesod/wiki/i18n-messages-in-the-scaffolding
+
+getUserUploads :: UserId -> DB [Entity StoredFile]
+getUserUploads userId = selectList [StoredFileUserId ==. userId] []
+
+getAllUsers :: DB [Entity User]
+getAllUsers = selectList [] [Asc UserId]
+
+getStoredFileById :: Key StoredFile -> Handler StoredFile
+getStoredFileById ident = do
+    mfile <- runDB $ get ident
+    case mfile of
+      Nothing -> notFound
+      Just file -> return file

@@ -21,7 +21,9 @@ getProfileR = do
     let submission = Nothing :: Maybe FileForm
         handlerName = "getProfileR" :: Text
 
-    (_, user) <- requireAuthPair
+    (userId, user) <- requireAuthPair
+    storedFiles <- runDB $ getUserUploads userId
+    users <- runDB $ getAllUsers
     defaultLayout $ do
         setTitle . toHtml $ userIdent user <> "'s User page"
         $(widgetFile "profile")
@@ -34,6 +36,8 @@ postProfileR = do
             FormSuccess res -> Just res
             _ -> Nothing
     (userId, user) <- requireAuthPair
+    storedFiles <- runDB $ getUserUploads userId
+    users <- runDB $ getAllUsers
     _ <- writeF submission userId user
     defaultLayout $ do
         setTitle . toHtml $ userIdent user <> "'s User page"
@@ -42,12 +46,12 @@ postProfileR = do
 writeF subm userId user = do
         let Just (FileForm info _) = subm
             thisFileName = fileName info
-            thisPathName = concat ["Users/",(userIdent user),"/",thisFileName]
+            thisPathName = concat ["static/Users/",(userIdent user),"/",thisFileName]
             thisContentType = fileContentType info
         let storedFile' = StoredFile { storedFileName = thisFileName,
         storedFileContentType = thisContentType, storedFilePath =  thisPathName, storedFileUserId = userId }
 
-        _ <- liftIO $ createDirectoryIfMissing True (unpack (concat ["Users/", (userIdent user)]))
+        _ <- liftIO $ createDirectoryIfMissing True (unpack (concat ["static/Users/", (userIdent user)]))
         _ <- runDB $ insertEntity storedFile'
         liftIO $ fileMove info (unpack thisPathName)
 
