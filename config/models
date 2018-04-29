@@ -21,3 +21,4 @@ StoredFile
     contentType Text
     path Text
     userId UserId
+    description Text

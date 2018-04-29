@@ -39,12 +39,46 @@
 
                     $nothing
                         File upload result will be here...
+    <!-- Forms
+        ================================================== -->
+    <div .bs-docs-section>
+        <div .row>
+            <div .col-lg-12>
+                <div .page-header>
+                    <h1 #forms>Song Search
 
-    <h2>
+        <div .row>
+            <div .col-lg-6>
+                <div .bs-callout bs-callout-info well>
+                    <form .form-horizontal method=post action=@{SongSearchR}#forms enctype=#{formEnctype}>
+                        ^{songWidget}
+
+                        <button .btn.btn-primary type="submit">
+                            Search !
+
+    <!-- Forms
+        ================================================== -->
+    <div .bs-docs-section>
+        <div .row>
+            <div .col-lg-12>
+                <div .page-header>
+                    <h1 #forms>User Search
+
+        <div .row>
+            <div .col-lg-6>
+                <div .bs-callout bs-callout-info well>
+                    <form .form-horizontal method=post action=@{UserSearchR}#forms enctype=#{userEnctype}>
+                        ^{userWidget}
+
+                        <button .btn.btn-primary type="submit">
+                            Search !
+
+
+   <h2>
       Your uploaded files:-
 
     <ul>
-        $forall (Entity x (StoredFile name contentType path userId)) <- storedFiles
+        $forall (Entity x (StoredFile name contentType path userId description)) <- storedFiles
             <li> <a>#{name}</a>
 
     <h2>

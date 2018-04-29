@@ -13,3 +13,5 @@
 
 /profile ProfileR GET POST
 /user/#UserId UploadsR GET
+/SongSearch SongSearchR POST
+/UserSearch UserSearchR POST

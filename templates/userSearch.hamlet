@@ -1,0 +1,6 @@
+<div .ui.container>
+                    <ul>
+                        $forall (Entity x (User name _)) <- userSearchRes
+                            <li> 
+                                <a>
+                                    <a href="@{UploadsR userId}" >#{name}

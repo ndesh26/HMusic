@@ -1,0 +1,15 @@
+<div .ui.container>
+
+    <!-- Forms
+        ================================================== -->
+            <div .col-lg-4.col-lg-offset-1>
+                <div .bs-callout.bs-callout-info.upload-response>
+
+                    <ul>
+                        $forall (Entity x (StoredFile name contentType path userId description)) <- songSearchRes
+                            <li> 
+                                <a>
+                                    <button onclick="addSrc('#{name}', '../#{path}')">
+                                            #{name}
+
+

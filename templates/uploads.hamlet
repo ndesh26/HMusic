@@ -5,7 +5,7 @@ $if null storedFiles
   <p>No files have been uploaded yet.
 $else
   <ul>
-    $forall (Entity x (StoredFile name contentType path userId)) <- storedFiles
+    $forall (Entity x (StoredFile name contentType path userId description)) <- storedFiles
       <li>
         <button onclick="addSrc('#{name}', '../#{path}')">
             #{name}

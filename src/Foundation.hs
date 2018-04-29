@@ -171,6 +171,8 @@ instance Yesod App where
     -- the profile route requires that the user is authenticated, so we
     -- delegate to that function
     isAuthorized ProfileR _ = isAuthenticated
+    isAuthorized SongSearchR _ = isAuthenticated
+    isAuthorized UserSearchR _ = isAuthenticated
 
     -- This function creates static content files in the static folder
     -- and names them based on a hash of their content. This allows
@@ -302,6 +304,12 @@ getUserUploads userId = selectList [StoredFileUserId ==. userId] []
 
 getAllUsers :: DB [Entity User]
 getAllUsers = selectList [] [Asc UserId]
+
+getAllUploads :: Text -> DB [Entity StoredFile]
+getAllUploads searchStr = selectList [StoredFileDescription ==. searchStr] []
+
+getUserSearch :: Text -> DB [Entity User]
+getUserSearch searchStr= selectList [UserIdent ==. searchStr] [Asc UserId]
 
 getStoredFileById :: Key StoredFile -> Handler StoredFile
 getStoredFileById ident = do
