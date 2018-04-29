@@ -1,6 +1,0 @@
-function play(audiofile) {
-    var sound = new Howl({
-      src: [audiofile]
-    });
-    sound.play()
-}
