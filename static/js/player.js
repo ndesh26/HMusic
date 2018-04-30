@@ -278,14 +278,19 @@ Player.prototype = {
     var div = document.createElement('div');
     div.className = 'list-song';
     div.innerHTML = name;
-    div.onclick = function() {
+/*    var close = document.createElement('a');
+    close.innerHTML = '<i class="fa fa-times" aria-hidden="true"></i>'
+    close.className = 'song-close';
+    div.append(close);
+  */  div.onclick = function() {
       player.skipTo(length - 1);
     };
     list.appendChild(div);
 
     if (self.playlist.length == 1)
       self.play(0);
-  }
+  },
+
 };
 
 // Setup our new audio player class and pass it the playlist.
