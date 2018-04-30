@@ -3,4 +3,4 @@
                         $forall (Entity x (User name _)) <- userSearchRes
                             <li> 
                                 <a>
-                                    <a href="@{UploadsR userId}" >#{name}
+                                    <a href="@{UploadsR x}" >#{name}

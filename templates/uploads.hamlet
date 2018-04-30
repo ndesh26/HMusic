@@ -8,5 +8,30 @@
           <li class="song-list">
             <a onclick="addSrc('#{name}', '../#{path}')">
               <i class="fa fa-play" aria-hidden="true">
+    <!-- Forms
+        ================================================== -->
+    <div .bs-docs-section>
+        <div .row>
+            <div .col-lg-12>
+                <div .page-header>
+
+        <div .row>
+            <div .col-lg-6>
+                <div .bs-callout bs-callout-info well>
+                    <form .form-horizontal method=post action=@{UploadsR userId}#forms enctype=#{enctype}>
+                        ^{widget}
+
+                        <button .btn.btn-primary type="submit">
+                            Follow
+
+
+<h2>Previously submitted files
+$if null storedFiles
+  <p>No files have been uploaded yet.
+$else
+  <ul>
+    $forall (Entity x (StoredFile name contentType path userId description)) <- storedFiles
+      <li>
+        <button onclick="addSrc('#{name}', '../#{path}')">
             #{name}
     

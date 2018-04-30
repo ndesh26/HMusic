@@ -173,6 +173,7 @@ instance Yesod App where
     isAuthorized ProfileR _ = isAuthenticated
     isAuthorized SongSearchR _ = isAuthenticated
     isAuthorized UserSearchR _ = isAuthenticated
+    isAuthorized (UploadsR _) _ = isAuthenticated
 
     -- This function creates static content files in the static folder
     -- and names them based on a hash of their content. This allows
@@ -305,8 +306,23 @@ getUserUploads userId = selectList [StoredFileUserId ==. userId] []
 getAllUsers :: DB [Entity User]
 getAllUsers = selectList [] [Asc UserId]
 
+getThisUser :: UserId -> DB [Entity User]
+getThisUser userId = selectList [UserId ==. userId] []
+
 getAllUploads :: Text -> DB [Entity StoredFile]
 getAllUploads searchStr = selectList [StoredFileDescription ==. searchStr] []
+
+getAllRelations :: DB [Entity Followers]
+getAllRelations = selectList [] []
+
+getUserFollowing :: UserId -> DB [Entity User]
+getUserFollowing userId = do
+        userRelations <- getUserRelations userId
+        let theseIds = [thisId | (Entity x (Followers _ thisId)) <- userRelations ] 
+        selectList [UserId <-. theseIds] []
+
+getUserRelations :: UserId -> DB [Entity Followers]
+getUserRelations userId = selectList [FollowersFollowBy ==. userId] []
 
 getUserSearch :: Text -> DB [Entity User]
 getUserSearch searchStr= selectList [UserIdent ==. searchStr] [Asc UserId]

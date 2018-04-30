@@ -22,3 +22,7 @@ StoredFile
     path Text
     userId UserId
     description Text
+Followers
+    followBy UserId
+    followed UserId
+

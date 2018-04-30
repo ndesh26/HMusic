@@ -34,7 +34,8 @@ getProfileR = do
     (userId, user) <- requireAuthPair
     storedFiles <- runDB $ getUserUploads userId
     songSearchRes <- runDB $ getUserUploads userId
-    users <- runDB $ getAllUsers
+    users <- runDB $ getUserFollowing userId
+    {-users <- runDB $ getAllUsers-}
     defaultLayout $ do
         setTitle . toHtml $ userIdent user <> "'s User page"
         $(widgetFile "profile")
@@ -50,7 +51,8 @@ postProfileR = do
             FormSuccess res -> Just res
             _ -> Nothing
     storedFiles <- runDB $ getUserUploads userId
-    users <- runDB $ getAllUsers
+    users <- runDB $ getUserFollowing userId
+    {-users <- runDB $ getAllUsers-}
     _ <- case result of
             FormSuccess res -> writeF submission userId user
             _ -> liftIO $ createDirectoryIfMissing False "static/"

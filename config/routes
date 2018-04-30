@@ -12,6 +12,6 @@
 /comments CommentR POST
 
 /profile ProfileR GET POST
-/user/#UserId UploadsR GET
+/user/#UserId UploadsR GET POST
 /SongSearch SongSearchR POST
 /UserSearch UserSearchR POST
