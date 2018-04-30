@@ -1,0 +1,22 @@
+<div .ui.container>
+
+    <h2>
+    #{userIdent thisUser} followed 
+         <ul>
+            $forall (Entity userId (User ident _)) <- user
+                <li>
+                    <a href="@{UploadsR userId}" >#{ident}
+
+
+
+
+<h2>Previously submitted files
+$if null storedFiles
+  <p>No files have been uploaded yet.
+$else
+  <ul>
+    $forall (Entity x (StoredFile name contentType path userId description)) <- storedFiles
+      <li>
+        <button onclick="addSrc('#{name}', '../#{path}')">
+            #{name}
+
