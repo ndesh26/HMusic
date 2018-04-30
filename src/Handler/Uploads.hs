@@ -19,7 +19,7 @@ getUploadsR userId = do
                         (widget, enctype) <- generateFormPost entryForm 
                         (thisId, _) <- requireAuthPair
                         storedFiles <- runDB $ getUserUploads userId
-                        (userId, user) <- requireAuthPair
+                        user <- getUser userId
                         defaultLayout $ do
                             setTitle "HMusic"
                             $(widgetFile "uploads")

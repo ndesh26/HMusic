@@ -2,21 +2,20 @@
 
     <h2>
     #{userIdent thisUser} followed 
-         <ul>
             $forall (Entity userId (User ident _)) <- user
-                <li>
                     <a href="@{UploadsR userId}" >#{ident}
 
 
-
-
-<h2>Previously submitted files
-$if null storedFiles
-  <p>No files have been uploaded yet.
-$else
-  <ul>
-    $forall (Entity x (StoredFile name contentType path userId description)) <- storedFiles
-      <li>
-        <button onclick="addSrc('#{name}', '../#{path}')">
+$forall (Entity userId (User ident _)) <- user
+ <h2>#{ident}'s Uploads
+    $if null storedFiles
+      <p>No files have been uploaded yet.
+    $else
+      <ul class="list-unstyled">
+        $forall (Entity x (StoredFile name contentType path userId description)) <- storedFiles
+          <li class="song-list">
+            <a onclick="addSrc('#{name}', '../#{path}')">
+              <i class="fa fa-play" aria-hidden="true">
             #{name}
+
 

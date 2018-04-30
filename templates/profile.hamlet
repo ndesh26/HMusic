@@ -1,25 +1,11 @@
 <div .ui.container>
-
-    <h1>
-      Access granted!
-
-    <p>
-      This page is protected and access is allowed only for authenticated users.
-
-    <p>
-      Your data is protected with us <strong><span class="username">#{userIdent user}</span></strong>!
     <!-- Forms
         ================================================== -->
     <div .bs-docs-section>
         <div .row>
             <div .col-lg-12>
                 <div .page-header>
-                    <h1 #forms>Forms
-
-                    <p>
-                        This is an example of a form. Read the
-                        <a href="http://www.yesodweb.com/book/forms">Forms chapter</a> #
-                        on the yesod book to learn more about them.
+                    <h1 #forms>File Upload
 
         <div .row>
             <div .col-lg-6>
@@ -77,9 +63,12 @@
    <h2>
       Your uploaded files:-
 
-    <ul>
+    <ul class="list-unstyled">
         $forall (Entity x (StoredFile name contentType path userId description)) <- storedFiles
-            <li> <a>#{name}</a>
+          <li class="song-list">
+            <a onclick="addSrc('#{name}', '../#{path}')">
+              <i class="fa fa-play" aria-hidden="true">
+            #{name}
 
     <h2>
       List of Users:- 
